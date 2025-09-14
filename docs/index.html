@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>uTime</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/205873631?s=400&u=7181957c1d03747f9dd9a668e2d4857d99ce55ff&v=4" type="image/png">
+</head>
+
+<body class="font-sans text-gray-900 bg-white leading-relaxed bg-gradient-to-b from-purple-100 via-pink-50 to-white ">
+
+
+<!-- Botón flotante redondo, oculto al inicio -->
+<button id="restoreNavbarBtn"
+        class="fixed top-4 left-4 z-50 bg-purple-700 text-white p-3 w-12 h-12 flex items-center justify-center rounded-full shadow-lg hover:bg-purple-800 transition-all duration-500 transform -translate-y-10 opacity-0 pointer-events-none"
+        aria-label="Mostrar navbar">
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+       xmlns="http://www.w3.org/2000/svg">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+  </svg>
+</button>
+
+<!-- Navbar principal -->
+<header id="navbarWrapper"
+        class="fixed top-0 left-0 w-full z-40 flex justify-center px-5 transform transition-all duration-500 ease-in-out translate-y-0 opacity-100">
+  <nav
+          class="flex items-center justify-between w-full max-w-screen-xl backdrop-blur-md bg-white/90 border border-gray-200 shadow-lg px-10 py-4 mt-5 rounded-full ring-1 ring-gray-100">
+
+    <!-- Botón para colapsar -->
+    <button id="collapseNavbarBtn"
+            class="mr-6 text-purple-700 hover:text-white bg-purple-100 hover:bg-purple-700 transition-all duration-300 rounded-full p-2">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+
+    <!-- Logo -->
+    <div class="flex items-center">
+      <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+        <img src="https://github.com/UPC-PaxTech/uTime/blob/main/img/logoutime.png?raw=true" alt="Logo" class="h-10 w-auto max-h-full">
+      </button>
+    </div>
+
+    <!-- Links -->
+    <ul class="hidden md:flex gap-6 flex-1 justify-center text-base font-medium text-gray-600">
+      <li><a href="#features" class="hover:text-purple-700 transition-colors duration-200 relative group" data-i18n="navbar_features">
+        Features <span
+              class="absolute left-0 -bottom-1 w-0 h-0.5 bg-purple-700 transition-all group-hover:w-full"></span>
+      </a></li>
+      <li><a href="#howitworks" class="hover:text-purple-700 transition-colors duration-200 relative group" data-i18n="navbar_howitworks">
+        How it Works <span
+              class="absolute left-0 -bottom-1 w-0 h-0.5 bg-purple-700 transition-all group-hover:w-full"></span>
+      </a></li>
+      <li><a href="#pricing" class="hover:text-purple-700 transition-colors duration-200 relative group" data-i18n="navbar_pricing">
+        Pricing <span
+              class="absolute left-0 -bottom-1 w-0 h-0.5 bg-purple-700 transition-all group-hover:w-full"></span>
+      </a></li>
+      <li><a href="#testimonials" class="hover:text-purple-700 transition-colors duration-200 relative group" data-i18n="navbar_testimonials">
+        Testimonials <span
+              class="absolute left-0 -bottom-1 w-0 h-0.5 bg-purple-700 transition-all group-hover:w-full"></span>
+      </a></li>
+      <li>
+        <a href="#about-product-video" class="hover:text-purple-700 transition-colors duration-200 relative group" data-i18n="navbar_video_team">
+          Video del Producto
+          <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-purple-700 transition-all group-hover:w-full"></span>
+        </a>
+      </li>
+
+      <li><a href="#faq" class="hover:text-purple-700 transition-colors duration-200 relative group" data-i18n="navbar_faq">
+        FAQ <span
+              class="absolute left-0 -bottom-1 w-0 h-0.5 bg-purple-700 transition-all group-hover:w-full"></span>
+      </a></li>
+    </ul>
+
+    <div class="relative mr-4">
+      <button id="languageToggle" class="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-purple-700 transition-colors duration-200 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md">
+        <img id="currentFlag" src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" width="20" height="14" class="rounded-sm" />
+        <span id="currentLangText" class="text-sm font-medium">English</span>
+        <svg class="w-4 h-4 transition-transform duration-200" id="languageArrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      <div id="languageMenu" class="absolute top-full right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden opacity-0 invisible transform scale-95 transition-all duration-200 z-50">
+        <button class="language-option w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-purple-50 transition-colors duration-200" data-lang="en">
+          <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" width="20" height="14" class="rounded-sm" />
+          <span class="text-sm font-medium text-gray-700" data-i18n="lang_english">English</span>
+        </button>
+        <button class="language-option w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-purple-50 transition-colors duration-200" data-lang="es">
+          <img src="https://upload.wikimedia.org/wikipedia/en/9/9a/Flag_of_Spain.svg" width="20" height="14" class="rounded-sm" />
+          <span class="text-sm font-medium text-gray-700" data-i18n="lang_spanish">Spanish</span>
+        </button>
+      </div>
+    </div>
+
+
+    <script>
+      // Traducciones directas - SIN cargar desde archivo
+      let translations = {
+        "en": {
+          "lang_english": "English",
+          "lang_spanish": "Spanish",
+          "title": "Welcome",
+          "description": "This is the English description",
+          "get_started": "Get Started",
+          "lang_english_selected": "English",
+          "lang_spanish_selected": "Spanish",
+          "navbar_features": "Features",
+          "navbar_howitworks": "How it Works",
+          "navbar_pricing": "Pricing",
+          "navbar_testimonials": "Testimonials",
+          "navbar_video_team": "Product Video",
+          "navbar_faq": "FAQ",
+          "navbar_get_started": "Get Started",
+          "hero_title1": "Skip the Calls",
+          "hero_title2": "Book in Real Time",
+          "hero_subtitle": "Let your clients reserve their appointment instantly. Manage availability in real time and simplify your day.",
+          "hero_cta": "Start for Free →",
+          "features_section_title": "Features",
+          "feature1_title": "Smart Appointment Management in Real Time",
+          "feature1_description": "Manage all your bookings with a visual calendar that updates in real time. Your team, your services, and your schedule — all in perfect sync.",
+          "feature1_item1": "📅 Interactive Calendar",
+          "feature1_item2": "⏳ Automatic Duration",
+          "feature1_item3": "📲 Simplified Booking",
+          "feature1_item4": "🧑‍💼 Staff Control",
+          "feature2_title": "Payments & Full Service Management",
+          "feature2_description": "Control your salon from one single dashboard: services, bookings, payments, and client interactions — simplified and secure.",
+          "feature2_item1": "💳 Secure Payments",
+          "feature2_item2": "🧾 Service Setup",
+          "feature2_item3": "📊 Booking Dashboard",
+          "feature2_item4": "🔔 Automated Reminders",
+          "feature3_title": "Full Control with Custom Profiles",
+          "feature3_description": "Each salon or barber gets a fully customizable profile to showcase services, manage their team, and control how clients see them — all in one place.",
+          "feature3_item1": "👥 Staff Management",
+          "feature3_item2": "🛠️ Customizable Profiles",
+          "feature3_item3": "📸 Portfolio Showcase",
+          "feature3_item4": "⚙️ Business Settings",
+          "features_cta": "Get Started →",
+          "feature1_item_1": "See every team member's bookings in real time.",
+          "feature1_item_2": "Service times are calculated automatically.",
+          "feature1_item_3": "Clients book easily through the app — you just manage.",
+          "feature1_item_4": "Assign and filter services by stylist or barber.",
+          "feature2_item_1": "Accept quick and safe payments directly through the app.",
+          "feature2_item_2": "Define your services, prices, and durations with ease.",
+          "feature2_item_3": "Track appointments and monitor your team's schedule.",
+          "feature2_item_4": "Clients receive reminders automatically before their bookings.",
+          "feature3_item_1": "Easily add and manage stylists and barbers under your brand.",
+          "feature3_item_2": "Set working hours, services, pricing, and portfolio images.",
+          "feature3_item_3": "Display photos of past work and specialties to attract clients.",
+          "feature3_item_4": "Adjust notifications, appointment rules, and booking preferences.",
+          "how_it_works_title": "How it works for providers",
+          "how_it_works_subtitle": "Follow these simple steps to efficiently manage your business and offer a professional experience to your clients.",
+          "step1_title": "Create your account",
+          "step1_description": "Register easily by entering your basic information. Access your personalized dashboard to start managing your business.",
+          "step2_title": "Add and manage your workers",
+          "step2_description": "Register your team, assign their schedules and control their agendas from one place.",
+          "step3_title": "Define your services",
+          "step3_description": "Create and customize the services you offer. Set duration, price and assign specific workers to each one.",
+          "step4_title": "Customize your profile",
+          "step4_description": "Add photos, description, address, payment methods and more to build a professional and reliable profile.",
+          "step5_title": "View your calendar",
+          "step5_description": "Access an overview of the calendar of all your workers and manage your agenda efficiently.",
+          "final_cta_title": "Ready to manage your business like never before?",
+          "final_cta_description": "Optimize your workflow, connect with customers and improve your professional presence with our platform.",
+          "final_cta_button": "Start now →",
+          "video_section_title": "Product Video",
+          "video_title": "Discover how uTime works",
+          "video_subtitle": "Learn about uTime's key features and how it can optimize your business management.",
+          "pricing_section_title": "Pricing",
+          "pricing_title": "Flexible Plans for Every Salon Stage",
+          "pricing_subtitle": "Choose the right tools to grow your beauty business — start free, upgrade anytime.",
+          "plan1_name": "Essential",
+          "plan1_description": "Start simple and stay organized",
+          "plan1_price": "Free",
+          "plan1_feature1": "Basic smart calendar",
+          "plan1_feature2": "Client booking page",
+          "plan1_feature3": "Reviews & ratings",
+          "plan1_feature4": "Stylist profiles",
+          "plan1_feature5": "2 stylist accounts",
+          "plan1_cta": "Get Started",
+          "plan2_name": "ProStyle",
+          "plan2_description": "Level up your salon with smart tools",
+          "plan2_price": "S/69.9<span class=\"text-base text-gray-500 font-normal\">/month</span>",
+          "plan2_feature1": "Advanced calendar sync",
+          "plan2_feature2": "WhatsApp reminders",
+          "plan2_feature3": "Up to 5 stylists",
+          "plan2_feature4": "Performance tracking",
+          "plan2_feature5": "Priority support",
+          "plan2_cta": "Start Free Trial",
+          "plan3_name": "Deluxe Studio",
+          "plan3_description": "All-in-one power for premium salons",
+          "plan3_price": "S/129.9<span class=\"text-base text-gray-500 font-normal\">/month</span>",
+          "plan3_feature1": "Full calendar control",
+          "plan3_feature2": "Unlimited reminders",
+          "plan3_feature3": "Unlimited stylists",
+          "plan3_feature4": "Advanced analytics",
+          "plan3_feature5": "VIP support",
+          "plan3_cta": "Contact Us",
+          "testimonials_title": "Trusted by more than 100+ beauty businesses",
+          "testimonials_subtitle": "Learn how uTime has transformed their way of working and why it is the ideal tool for their business.",
+          "testimonial1_text": "Since we started using uTime, appointment organization has been impeccable. Our clients are happier and the whole team works more calmly.",
+          "testimonial1_author": "Luis Paredes",
+          "testimonial1_role": "Owner of Barbería El Corte Fino",
+          "testimonial2_text": "With uTime we save hours every week in salon management. Everything is more fluid, from shifts to staff control.",
+          "testimonial2_author": "María Fernanda Ríos",
+          "testimonial2_role": "Manager at Salón Glamour",
+          "testimonial3_text": "uTime allows me to see statistics and better control team productivity. It's exactly what we needed at our beauty center.",
+          "testimonial3_author": "Karla Mendoza",
+          "testimonial3_role": "Manager of Estética Belle Femme",
+          "testimonial4_text": "I recommend uTime to all barber colleagues. It's easy to use, powerful and makes the business run like clockwork.",
+          "testimonial4_author": "Ricardo Torres",
+          "testimonial4_role": "Head of Barbería Urban Style",
+          "faq_title": "Frequently Asked Questions",
+          "faq_name": "Clear Your Doubts About uTime",
+          "faq_subtitle": "Here you'll find answers to the most common questions about our platform for barbershops and beauty salons.",
+          "faq_question1": "Is uTime suitable for small barbershops or just for large businesses?",
+          "faq_answer1": "uTime is designed to adapt to businesses of any size, from solo barbers to salons with multiple team members.",
+          "faq_question2": "Do I need an internet connection to use uTime?",
+          "faq_answer2": "Yes, uTime is a cloud-based platform, so it requires an internet connection to work properly and sync data in real time.",
+          "faq_question3": "Does uTime help manage staff schedules and shifts?",
+          "faq_answer3": "Absolutely! uTime is designed to make it easy to organize shifts, manage schedules, and track staff attendance.",
+          "faq_question4": "Is there a free trial to try uTime?",
+          "faq_answer4": "Yes, we offer a 14-day free trial so you can explore all uTime features without any commitment.",
+          "faq_question5": "Does uTime help me manage client appointments?",
+          "faq_answer5": "Yes. uTime includes an intelligent booking system that allows your clients to book online and receive automatic reminders.",
+          "cta_title": "Ready to transform your daily operations?",
+          "cta_subtitle": "Discover how uTime helps you manage appointments, shifts, and clients with ease. Start today and optimize your time like never before.",
+          "cta_button": "Start for Free →",
+          "footer_quick_links": "Quick Links",
+          "footer_support": "Support",
+          "footer_contact": "Contact Us",
+          "footer_social": "Social",
+          "footer_link1": "Home",
+          "footer_link2": "Features",
+          "footer_link3": "FAQ",
+          "footer_link4": "Support",
+          "footer_support_link1": "Help Center",
+          "footer_support_link2": "Getting Started",
+          "footer_support_link3": "Contact Support",
+          "footer_support_link4": "Community Forums",
+          "footer_support_link5": "Documentation",
+          "footer_contact_info1": "📧 utime@company.com",
+          "footer_contact_info2": "📞 (+51) 979 447 361",
+          "footer_contact_info3": "📍 Lima Lima Miraflores<br>Peru",
+          "footer_copyright": "© 2025 uTime. All rights reserved.",
+          "tag": "Take your barbershop or salon to the next level"
+        },
+        "es": {
+          "lang_english": "Inglés",
+          "lang_spanish": "Español",
+          "title": "Bienvenido",
+          "description": "Esta es la descripción en español",
+          "get_started": "Empezar",
+          "lang_english_selected": "Inglés",
+          "lang_spanish_selected": "Español",
+          "navbar_features": "Características",
+          "navbar_howitworks": "Cómo funciona",
+          "navbar_pricing": "Precios",
+          "navbar_testimonials": "Testimonios",
+          "navbar_video_team": "Video del Producto",
+          "navbar_faq": "Preguntas",
+          "navbar_get_started": "Empezar",
+          "hero_title1": "Olvídate de las llamadas",
+          "hero_title2": "Reserva en tiempo real",
+          "hero_subtitle": "Permite que tus clientes reserven sus citas al instante. Gestiona la disponibilidad en tiempo real y simplifica tu día.",
+          "hero_cta": "Empezar gratis →",
+          "features_section_title": "Características",
+          "feature1_title": "Gestión inteligente de citas en tiempo real",
+          "feature1_description": "Administra todas tus reservas con un calendario visual que se actualiza en tiempo real. Tu equipo, tus servicios y tu horario, todo en perfecta sincronía.",
+          "feature1_item1": "📅 Calendario interactivo",
+          "feature1_item2": "⏳ Duración automática",
+          "feature1_item3": "📲 Reserva simplificada",
+          "feature1_item4": "🧑‍💼 Control de personal",
+          "feature2_title": "Pagos y gestión completa de servicios",
+          "feature2_description": "Controla tu salón desde un solo panel: servicios, reservas, pagos e interacciones con clientes, todo simplificado y seguro.",
+          "feature2_item1": "💳 Pagos seguros",
+          "feature2_item2": "🧾 Configuración de servicios",
+          "feature2_item3": "📊 Panel de reservas",
+          "feature2_item4": "🔔 Recordatorios automáticos",
+          "feature3_title": "Control total con perfiles personalizados",
+          "feature3_description": "Cada salón o barbero obtiene un perfil completamente personalizable para mostrar servicios, administrar su equipo y controlar cómo lo ven los clientes, todo en un solo lugar.",
+          "feature3_item1": "👥 Gestión de personal",
+          "feature3_item2": "🛠️ Perfiles personalizables",
+          "feature3_item3": "📸 Muestra de portafolio",
+          "feature3_item4": "⚙️ Configuración del negocio",
+          "features_cta": "Empezar →",
+          "feature1_item_1": "Ver las reservas de cada miembro del equipo en tiempo real.",
+          "feature1_item_2": "Los tiempos de servicio se calculan automáticamente.",
+          "feature1_item_3": "Los clientes reservan fácilmente a través de la app - tú sólo gestionas.",
+          "feature1_item_4": "Asigna y filtra servicios por estilista o peluquero",
+          "feature2_item_1": "Acepta pagos rápidos y seguros directamente a través de la app",
+          "feature2_item_2": "Define tus servicios, precios y duraciones con facilidad.",
+          "feature2_item_3": "Realiza un seguimiento de las citas y controla la agenda de tu equipo.",
+          "feature2_item_4": "Los clientes reciben recordatorios automáticamente antes de sus reservas",
+          "feature3_item_1": "Añade y gestiona fácilmente estilistas y peluqueros bajo tu marca",
+          "feature3_item_2": "Establece horarios de trabajo, servicios, precios e imágenes de portafolio.",
+          "feature3_item_3": "Mostrar fotos de trabajos anteriores y especialidades para atraer clientes",
+          "feature3_item_4": "Ajustar notificaciones, reglas de citas y preferencias de reserva",
+          "how_it_works_title": "Cómo funciona para los proveedores",
+          "how_it_works_subtitle": "Sigue estos simples pasos para gestionar eficientemente tu negocio y ofrecer una experiencia profesional a tus clientes.",
+          "step1_title": "Crea tu cuenta",
+          "step1_description": "Regístrate fácilmente ingresando tu información básica. Accede a tu panel personalizado para comenzar a gestionar tu negocio.",
+          "step2_title": "Agrega y gestiona a tus trabajadores",
+          "step2_description": "Registra a tu equipo, asigna sus horarios y controla sus agendas desde un solo lugar.",
+          "step3_title": "Define tus servicios",
+          "step3_description": "Crea y personaliza los servicios que ofreces. Establece duración, precio y asigna trabajadores específicos a cada uno.",
+          "step4_title": "Personaliza tu perfil",
+          "step4_description": "Agrega fotos, descripción, dirección, métodos de pago y más para construir un perfil profesional y confiable.",
+          "step5_title": "Visualiza tu calendario",
+          "step5_description": "Accede a una vista general del calendario de todos tus trabajadores y gestiona tu agenda con eficiencia.",
+          "final_cta_title": "¿Listo para gestionar tu negocio como nunca antes?",
+          "final_cta_description": "Optimiza tu flujo de trabajo, conecta con clientes y mejora tu presencia profesional con nuestra plataforma.",
+          "final_cta_button": "Comienza ahora →",
+          "video_section_title": "Video del Producto",
+          "video_title": "Descubre cómo funciona uTime",
+          "video_subtitle": "Conoce a fondo las funcionalidades clave de uTime y cómo puede optimizar la gestión de tu negocio.",
+          "pricing_section_title": "Precios",
+          "pricing_title": "Planes flexibles para cada etapa de tu salón",
+          "pricing_subtitle": "Elige las herramientas adecuadas para hacer crecer tu negocio de belleza — empieza gratis, actualiza cuando quieras.",
+          "plan1_name": "Esencial",
+          "plan1_description": "Comienza de manera simple y mantente organizado",
+          "plan1_price": "Gratis",
+          "plan1_feature1": "Calendario inteligente básico",
+          "plan1_feature2": "Página de reserva de clientes",
+          "plan1_feature3": "Reseñas y calificaciones",
+          "plan1_feature4": "Perfiles de estilistas",
+          "plan1_feature5": "2 cuentas de estilistas",
+          "plan1_cta": "Empezar",
+          "plan2_name": "ProStyle",
+          "plan2_description": "Mejora tu salón con herramientas inteligentes",
+          "plan2_price": "S/69.9<span class=\"text-base text-gray-500 font-normal\">/mes</span>",
+          "plan2_feature1": "Sincronización avanzada de calendario",
+          "plan2_feature2": "Recordatorios por WhatsApp",
+          "plan2_feature3": "Hasta 5 estilistas",
+          "plan2_feature4": "Seguimiento de desempeño",
+          "plan2_feature5": "Soporte prioritario",
+          "plan2_cta": "Prueba Gratis",
+          "plan3_name": "Deluxe Studio",
+          "plan3_description": "Todo el poder para salones premium",
+          "plan3_price": "S/129.9<span class=\"text-base text-gray-500 font-normal\">/mes</span>",
+          "plan3_feature1": "Control total del calendario",
+          "plan3_feature2": "Recordatorios ilimitados",
+          "plan3_feature3": "Estilistas ilimitados",
+          "plan3_feature4": "Analíticas avanzadas",
+          "plan3_feature5": "Soporte VIP",
+          "plan3_cta": "Contáctanos",
+          "testimonials_title": "Confiado por más de 100+ negocios de belleza",
+          "testimonials_subtitle": "Conoce cómo uTime ha transformado su forma de trabajar y por qué es la herramienta ideal para su negocio.",
+          "testimonial1_text": "Desde que usamos uTime, la organización de las citas es impecable. Nuestros clientes están más felices y todo el equipo trabaja más tranquilo.",
+          "testimonial1_author": "Luis Paredes",
+          "testimonial1_role": "Dueño de Barbería El Corte Fino",
+          "testimonial2_text": "Con uTime ahorramos horas cada semana en la gestión del salón. Todo es más fluido, desde los turnos hasta el control del personal.",
+          "testimonial2_author": "María Fernanda Ríos",
+          "testimonial2_role": "Administradora en Salón Glamour",
+          "testimonial3_text": "uTime me permite ver estadísticas y controlar mejor la productividad del equipo. Es justo lo que necesitábamos en nuestro centro de estética.",
+          "testimonial3_author": "Karla Mendoza",
+          "testimonial3_role": "Gerente de Estética Belle Femme",
+          "testimonial4_text": "Recomiendo uTime a todos los colegas barberos. Es fácil de usar, potente y hace que el negocio funcione como reloj suizo.",
+          "testimonial4_author": "Ricardo Torres",
+          "testimonial4_role": "Jefe de Barbería Urban Style",
+          "faq_title": "Preguntas frecuentes",
+          "faq_name": "Despeja tus dudas acerca de uTime",
+          "faq_subtitle": "Aquí encontrarás respuestas a las preguntas más comunes sobre nuestra plataforma para barberías y salones de belleza.",
+          "faq_question1": "¿uTime es adecuado para pequeñas barberías o solo para grandes negocios?",
+          "faq_answer1": "uTime está diseñado para adaptarse a negocios de cualquier tamaño, desde barberos independientes hasta salones con múltiples miembros en el equipo.",
+          "faq_question2": "¿Necesito conexión a internet para usar uTime?",
+          "faq_answer2": "Sí, uTime es una plataforma basada en la nube, por lo que requiere conexión a internet para funcionar correctamente y sincronizar datos en tiempo real.",
+          "faq_question3": "¿uTime ayuda a gestionar horarios y turnos del personal?",
+          "faq_answer3": "¡Absolutamente! uTime está diseñado para facilitar la organización de turnos, la gestión de horarios y el seguimiento de la asistencia del personal.",
+          "faq_question4": "¿Hay una prueba gratuita para probar uTime?",
+          "faq_answer4": "Sí, ofrecemos una prueba gratuita de 14 días para que puedas explorar todas las funciones de uTime sin compromiso.",
+          "faq_question5": "¿uTime me ayuda a gestionar citas de clientes?",
+          "faq_answer5": "Sí. uTime incluye un sistema de reservas inteligente que permite a tus clientes reservar en línea y recibir recordatorios automáticos.",
+          "cta_title": "¿Listo para transformar tus operaciones diarias?",
+          "cta_subtitle": "Descubre cómo uTime te ayuda a gestionar citas, turnos y clientes con facilidad. Comienza hoy y optimiza tu tiempo como nunca antes.",
+          "cta_button": "Empieza gratis →",
+          "footer_quick_links": "Enlaces rápidos",
+          "footer_support": "Soporte",
+          "footer_contact": "Contáctanos",
+          "footer_social": "Redes",
+          "footer_link1": "Inicio",
+          "footer_link2": "Características",
+          "footer_link3": "Preguntas",
+          "footer_link4": "Soporte",
+          "footer_support_link1": "Centro de ayuda",
+          "footer_support_link2": "Cómo empezar",
+          "footer_support_link3": "Contactar soporte",
+          "footer_support_link4": "Foros comunitarios",
+          "footer_support_link5": "Documentación",
+          "footer_contact_info1": "📧 utime@empresa.com",
+          "footer_contact_info2": "📞 (+51) 979 447 361",
+          "footer_contact_info3": "📍 Lima Lima Miraflores<br>Perú",
+          "footer_copyright": "© 2025 uTime. Todos los derechos reservados.",
+          "tag": "Lleva tu barbería o peluquería al siguiente nivel"
+        }
+      };
+
+      let isMenuOpen = false;
+      let currentLanguage = 'en'; // Idioma actual
+
+      const languages = {
+        en: {
+          name: "English",
+          flag: "https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg"
+        },
+        es: {
+          name: "Español",
+          flag: "https://upload.wikimedia.org/wikipedia/en/9/9a/Flag_of_Spain.svg"
+        }
+      };
+
+      // Esperar a que el DOM esté listo
+      document.addEventListener('DOMContentLoaded', () => {
+        const languageToggle = document.getElementById('languageToggle');
+        const languageMenu = document.getElementById('languageMenu');
+        const languageArrow = document.getElementById('languageArrow');
+        const currentFlag = document.getElementById('currentFlag');
+        const currentLangText = document.getElementById('currentLangText');
+        const languageOptions = document.querySelectorAll('.language-option');
+
+        // Cargar idioma guardado o usar inglés por defecto
+        const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+        currentLanguage = savedLanguage;
+
+        // Mostrar/ocultar menú
+        function toggleMenu() {
+          isMenuOpen = !isMenuOpen;
+          if (isMenuOpen) {
+            languageMenu.classList.remove('opacity-0', 'invisible', 'scale-95');
+            languageMenu.classList.add('opacity-100', 'visible', 'scale-100');
+            languageArrow.style.transform = 'rotate(180deg)';
+          } else {
+            languageMenu.classList.add('opacity-0', 'invisible', 'scale-95');
+            languageMenu.classList.remove('opacity-100', 'visible', 'scale-100');
+            languageArrow.style.transform = 'rotate(0deg)';
+          }
+        }
+
+        function switchLanguage(lang) {
+          currentLanguage = lang;
+          
+          // Guardar idioma seleccionado
+          localStorage.setItem('selectedLanguage', lang);
+          
+          // Cambiar textos traducibles
+          document.querySelectorAll("[data-i18n]").forEach(el => {
+            const key = el.getAttribute("data-i18n");
+            if (translations[lang] && translations[lang][key]) {
+              // Para elementos que contienen HTML, usar innerHTML
+              if (el.tagName === 'BUTTON' || el.tagName === 'A' || el.tagName === 'H1' || el.tagName === 'H2' || el.tagName === 'H3' || el.tagName === 'H4' || el.tagName === 'H5' || el.tagName === 'H6' || el.tagName === 'P' || el.tagName === 'SPAN' || el.tagName === 'DIV') {
+                el.innerHTML = translations[lang][key];
+              } else {
+                el.textContent = translations[lang][key];
+              }
+            }
+          });
+
+          // Cambiar bandera y nombre en el botón principal
+          currentFlag.src = languages[lang].flag;
+          currentLangText.textContent = languages[lang].name;
+          
+          // Cambiar el atributo lang del HTML
+          document.documentElement.lang = lang;
+          
+          console.log('Language switched to:', lang);
+        }
+
+        // Event listeners
+        languageToggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          console.log('Toggle clicked');
+          toggleMenu();
+        });
+
+        languageOptions.forEach(option => {
+          option.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const langCode = option.getAttribute('data-lang');
+            console.log('Language option clicked:', langCode);
+            switchLanguage(langCode);
+            toggleMenu();
+          });
+        });
+
+        document.addEventListener('click', () => {
+          if (isMenuOpen) {
+            toggleMenu();
+          }
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && isMenuOpen) {
+            toggleMenu();
+          }
+        });
+
+        // Inicializar con el idioma guardado
+        switchLanguage(currentLanguage);
+      });
+    </script>
+
+
+    <!-- CTA -->
+    <a href="https://upc-paxtech.github.io/Frontend-Web-Applications/"
+       class="ml-4 bg-purple-700 text-white font-semibold px-5 py-2.5 rounded-md shadow-md hover:bg-purple-800 transition duration-300" data-i18n="get_started">
+      Get Started
+    </a>
+  </nav>
+</header>
+
+<script>
+  const collapseBtn = document.getElementById('collapseNavbarBtn');
+  const restoreBtn = document.getElementById('restoreNavbarBtn');
+  const navbar = document.getElementById('navbarWrapper');
+
+  collapseBtn.addEventListener('click', () => {
+    // Oculta el navbar desplazándolo hacia arriba
+    navbar.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+
+    // Muestra el botón flotante bajando
+    restoreBtn.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-10');
+    restoreBtn.classList.add('translate-y-0');
+  });
+
+  restoreBtn.addEventListener('click', () => {
+    // Restaura el navbar bajando desde arriba
+    navbar.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
+
+    // Oculta el botón flotante subiéndolo
+    restoreBtn.classList.add('opacity-0', 'pointer-events-none', '-translate-y-10');
+    restoreBtn.classList.remove('translate-y-0');
+  });
+</script>
+
+
+
+  <!-- Hero Section -->
+<section id="hero" class="min-h-screen flex flex-col items-center justify-center text-center gap-6 px-5 pt-60 pb-32 bg-gradient-to-b from-purple-100 via-pink-50 to-white">
+
+
+
+  <h2 class="text-6xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-purple-800 via-purple-500 to-gray-950 leading-tight">
+    <span data-i18n="hero_title1">Skip the Calls</span><br class="hidden md:block">
+    <span class="mt-3 block" data-i18n="hero_title2">Book in Real Time</span>
+  </h2>
+
+    <p class="text-lg md:text-xl text-gray-700 max-w-2xl mt-6" data-i18n="hero_subtitle">
+      Let your clients reserve their appointment instantly. Manage availability in real time and simplify your day.
+    </p>
+
+    <a
+            href="https://upc-paxtech.github.io/Frontend-Web-Applications/"
+            data-i18n="hero_cta"
+            class="bg-gradient-to-r from-purple-600 to-purple-800 text-white font-semibold px-8 py-4 rounded-full shadow-xl hover:from-purple-700 hover:to-purple-900 transition duration-300 mt-8 text-lg">
+      Start for Free →
+    </a>
+
+    <img
+            src="https://i.ibb.co/hFnGY2xT/HeroLP.png"
+            alt="Vista previa de la app"
+            class="mt-14 w-11/12 max-w-4xl rounded-2xl shadow-2xl border border-white/40">
+
+  </section>
+
+
+
+
+<!-- Features Section -->
+<section id="features" class="py-20 space-y-28 bg-white">
+
+  <!-- Feature 1 -->
+  <div class="max-w-screen-xl mx-auto px-6">
+    <div class="bg-gradient-to-b from-purple-100 via-pink-50 to-white p-10 rounded-3xl shadow-xl flex flex-col lg:flex-row items-center gap-12">
+      <!-- Text -->
+      <div class="lg:w-1/2">
+        <div class="text-sm font-medium text-purple-600 uppercase tracking-wide mb-2"  data-i18n="features_section_title">Features</div>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 leading-tight" data-i18n="feature1_title">
+          Smart Appointment Management in Real Time
+        </h2>
+        <p class="text-gray-600 mt-4" data-i18n="feature1_description">
+          Manage all your bookings with a visual calendar that updates in real time. Your team, your services, and your schedule — all in perfect sync.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+          <div>
+            <h4 class="font-semibold" data-i18n="feature1_item1">📅 Interactive Calendar</h4>
+            <p class="text-sm text-gray-600" data-i18n="feature1_item_1">See every team member’s bookings in real time.</p>
+          </div>
+          <div>
+            <h4 class="font-semibold" data-i18n="feature1_item2">⏳ Automatic Duration</h4>
+            <p class="text-sm text-gray-600" data-i18n="feature1_item_2">Service times are calculated automatically.</p>
+          </div>
+          <div>
+            <h4 class="font-semibold" data-i18n="feature1_item3">📲 Simplified Booking</h4>
+            <p class="text-sm text-gray-600" data-i18n="feature1_item_3">Clients book easily through the app — you just manage.</p>
+          </div>
+          <div>
+            <h4 class="font-semibold" data-i18n="feature1_item4">🧑‍💼 Staff Control</h4>
+            <p class="text-sm text-gray-600" data-i18n="feature1_item_4">Assign and filter services by stylist or barber.</p>
+          </div>
+        </div>
+
+        <button onclick="window.location.href='https://upc-paxtech.github.io/Frontend-Web-Applications/'" class="mt-10 px-6 py-3 bg-purple-600 text-white rounded-lg shadow-md hover:bg-purple-700 transition" data-i18n="features_cta">
+          Get Started →
+        </button>
+      </div>
+      <!-- Image -->
+      <div class="lg:w-1/2">
+        <img src="https://i.ibb.co/6cZ5B5QV/CHA2.png" alt="Real-Time Booking Calendar" class="w-full rounded-xl shadow-xl">
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Feature 2 (reversed) -->
+  <div class="max-w-screen-xl mx-auto px-6">
+    <div class="bg-gradient-to-b from-purple-100 via-pink-50 to-white p-10 rounded-3xl shadow-xl flex flex-col lg:flex-row-reverse items-center gap-12">
+      <!-- Text -->
+      <div class="lg:w-1/2">
+        <div class="text-sm font-medium text-purple-600 uppercase tracking-wide mb-2" data-i18n="features_section_title">Features</div>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 leading-tight" data-i18n="feature2_title">
+          Payments & Full Service Management
+        </h2>
+        <p class="text-gray-600 mt-4" data-i18n="feature2_description">
+          Control your salon from one single dashboard: services, bookings, payments, and client interactions — simplified and secure.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+          <div>
+            <h4 class="font-semibold" data-i18n="feature2_item1">💳 Secure Payments</h4>
+            <p class="text-sm text-gray-600" data-i18n="feature2_item_1">Accept quick and safe payments directly through the app.</p>
+          </div>
+          <div>
+            <h4 class="font-semibold" data-i18n="feature2_item2">🧾 Service Setup</h4>
+            <p class="text-sm text-gray-600" data-i18n="feature2_item_2">Define your services, prices, and durations with ease.</p>
+          </div>
+          <div>
+            <h4 class="font-semibold" data-i18n="feature2_item3">📊 Booking Dashboard</h4>
+            <p class="text-sm text-gray-600" data-i18n="feature2_item_3">Track appointments and monitor your team's schedule.</p>
+          </div>
+          <div>
+            <h4 class="font-semibold" data-i18n="feature2_item4">🔔 Automated Reminders</h4>
+            <p class="text-sm text-gray-600" data-i18n="feature2_item_4">Clients receive reminders automatically before their bookings.</p>
+          </div>
+        </div>
+
+        <button onclick="window.location.href='https://upc-paxtech.github.io/Frontend-Web-Applications/'" class="mt-10 px-6 py-3 bg-purple-600 text-white rounded-lg shadow-md hover:bg-purple-700 transition" data-i18n="features_cta">
+          Get Started →
+        </button>
+      </div>
+      <!-- Image -->
+      <div class="lg:w-1/2">
+        <img src="https://i.ibb.co/VYkTGhFv/CHA1.png" alt="Payments Feature Image" class="w-full rounded-xl shadow-xl">
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Feature 3 -->
+  <div class="max-w-screen-xl mx-auto px-6">
+    <div class="bg-gradient-to-b from-purple-100 via-pink-50 to-white p-10 rounded-3xl shadow-xl flex flex-col lg:flex-row items-center gap-12">
+      <!-- Text -->
+      <div class="lg:w-1/2">
+        <div class="text-sm font-medium text-purple-600 uppercase tracking-wide mb-2" data-i18n="features_section_title">Features</div>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 leading-tight" data-i18n="feature3_title">
+          Full Control with Custom Profiles
+        </h2>
+        <p class="text-gray-600 mt-4" data-i18n="feature3_description">
+          Each salon or barber gets a fully customizable profile to showcase services, manage their team, and control how clients see them — all in one place.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+          <div>
+            <h4 class="font-semibold" data-i18n="feature3_item1">👥 Staff Management</h4>
+            <p class="text-sm text-gray-600" data-i18n="feature3_item_1">Easily add and manage stylists and barbers under your brand.</p>
+          </div>
+          <div>
+            <h4 class="font-semibold" data-i18n="feature3_item2">🛠️ Customizable Profiles</h4>
+            <p class="text-sm text-gray-600" data-i18n="feature3_item_2">Set working hours, services, pricing, and portfolio images.</p>
+          </div>
+          <div>
+            <h4 class="font-semibold" data-i18n="feature3_item3">📸 Portfolio Showcase</h4>
+            <p class="text-sm text-gray-600" data-i18n="feature3_item_3">Display photos of past work and specialties to attract clients.</p>
+          </div>
+          <div>
+            <h4 class="font-semibold" data-i18n="feature3_item4">⚙️ Business Settings</h4>
+            <p class="text-sm text-gray-600" data-i18n="feature3_item_4">Adjust notifications, appointment rules, and booking preferences.</p>
+          </div>
+        </div>
+
+        <button onclick="window.location.href='https://upc-paxtech.github.io/Frontend-Web-Applications/'" class="mt-10 px-6 py-3 bg-purple-600 text-white rounded-lg shadow-md hover:bg-purple-700 transition" data-i18n="features_cta">
+          Get Started →
+        </button>
+      </div>
+      <!-- Image -->
+      <div class="lg:w-1/2">
+        <img src="https://i.ibb.co/2rML071/S3LP.png" alt="Custom Profile Feature Image" class="w-full rounded-xl shadow-xl">
+      </div>
+    </div>
+  </div>
+
+
+
+</section>
+
+
+
+<!-- How it Works -->
+<section id="howitworks" class="bg-gradient-to-b from-white to-purple-50 py-20">
+  <div class="max-w-screen-xl mx-auto px-6 text-center">
+
+    <!-- Heading -->
+    <h2 class="text-3xl md:text-4xl font-bold text-gray-800" data-i18n="how_it_works_title">Cómo funciona para los proveedores</h2>
+    <p class="text-gray-600 mt-3 max-w-2xl mx-auto" data-i18n="how_it_works_subtitle">
+      Sigue estos simples pasos para gestionar eficientemente tu negocio y ofrecer una experiencia profesional a tus clientes.
+    </p>
+
+    <!-- Timeline -->
+    <div class="relative mt-20">
+      <!-- Vertical Line -->
+      <div class="absolute left-1/2 transform -translate-x-1/2 h-full border-l-2 border-purple-200"></div>
+
+      <!-- Step 1 -->
+      <div class="relative z-10 flex flex-col md:flex-row items-center md:items-start md:gap-12 mb-20">
+        <div class="w-full md:w-1/2 md:pr-12 text-right md:text-left">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2" data-i18n="step1_title">Crea tu cuenta</h3>
+          <p class="text-gray-600" data-i18n="step1_description">
+            Regístrate fácilmente ingresando tu información básica. Accede a tu panel personalizado para comenzar a gestionar tu negocio.
+          </p>
+        </div>
+        <div class="w-full md:w-1/2 mt-8 md:mt-0">
+          <img src="https://i.ibb.co/mVLJjVQc/STEPS1.png" alt="Step 1" class="rounded-xl shadow-lg mx-auto max-w-sm">
+        </div>
+        <div class="absolute left-1/2 top-1 transform -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-purple-300 rounded-full w-12 h-12 flex items-center justify-center text-purple-700 text-2xl">
+          👤
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="relative z-10 flex flex-col md:flex-row-reverse items-center md:gap-12 mb-20">
+        <div class="w-full md:w-1/2 md:pl-12 text-left">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2" data-i18n="step2_title">Agrega y gestiona a tus trabajadores</h3>
+          <p class="text-gray-600" data-i18n="step2_description">
+            Registra a tu equipo, asigna sus horarios y controla sus agendas desde un solo lugar.
+          </p>
+        </div>
+        <div class="w-full md:w-1/2 mt-8 md:mt-0">
+          <img src="https://i.ibb.co/6cZ5B5QV/CHA2.png" alt="Step 2" class="rounded-xl shadow-lg mx-auto max-w-sm">
+        </div>
+        <div class="absolute left-1/2 top-1 transform -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-purple-300 rounded-full w-12 h-12 flex items-center justify-center text-purple-700 text-2xl">
+          🧑‍🤝‍🧑
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="relative z-10 flex flex-col md:flex-row items-center md:items-start md:gap-12 mb-20">
+        <div class="w-full md:w-1/2 md:pr-12 text-right md:text-left">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2" data-i18n="step3_title">Define tus servicios</h3>
+          <p class="text-gray-600" data-i18n="step3_description">
+            Crea y personaliza los servicios que ofreces. Establece duración, precio y asigna trabajadores específicos a cada uno.
+          </p>
+        </div>
+        <div class="w-full md:w-1/2 mt-8 md:mt-0">
+          <img src="https://i.ibb.co/Z1gnPqM3/CHA3.png" alt="Step 3" class="rounded-xl shadow-lg mx-auto max-w-sm">
+        </div>
+        <div class="absolute left-1/2 top-1 transform -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-purple-300 rounded-full w-12 h-12 flex items-center justify-center text-purple-700 text-2xl">
+          💈
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="relative z-10 flex flex-col md:flex-row-reverse items-center md:gap-12 mb-20">
+        <div class="w-full md:w-1/2 md:pl-12 text-left">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2" data-i18n="step4_title">Personaliza tu perfil</h3>
+          <p class="text-gray-600" data-i18n="step4_description">
+            Agrega fotos, descripción, dirección, métodos de pago y más para construir un perfil profesional y confiable.
+          </p>
+        </div>
+        <div class="w-full md:w-1/2 mt-8 md:mt-0">
+          <img src="https://i.ibb.co/2rML071/S3LP.png" alt="Step 4" class="rounded-xl shadow-lg mx-auto max-w-sm">
+        </div>
+        <div class="absolute left-1/2 top-1 transform -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-purple-300 rounded-full w-12 h-12 flex items-center justify-center text-purple-700 text-2xl">
+          🧾
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="relative z-10 flex flex-col md:flex-row items-center md:items-start md:gap-12 mb-20">
+        <div class="w-full md:w-1/2 md:pr-12 text-right md:text-left">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2" data-i18n="step5_title">Visualiza tu calendario</h3>
+          <p class="text-gray-600" data-i18n="step5_description">
+            Accede a una vista general del calendario de todos tus trabajadores y gestiona tu agenda con eficiencia.
+          </p>
+        </div>
+        <div class="w-full md:w-1/2 mt-8 md:mt-0">
+          <img src="https://i.ibb.co/x8jKLZpC/STEPS5.png" alt="Step 5" class="rounded-xl shadow-lg mx-auto max-w-sm">
+        </div>
+        <div class="absolute left-1/2 top-1 transform -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-purple-300 rounded-full w-12 h-12 flex items-center justify-center text-purple-700 text-2xl">
+          📆
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-20 max-w-6xl mx-auto px-6">
+      <div class="bg-white rounded-3xl shadow-xl px-10 py-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div class="text-center lg:text-left">
+          <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2" data-i18n="final_cta_title">¿Listo para gestionar tu negocio como nunca antes?</h3>
+          <p class="text-gray-600" data-i18n="final_cta_description">
+            Optimiza tu flujo de trabajo, conecta con clientes y mejora tu presencia profesional con nuestra plataforma.
+          </p>
+        </div>
+        <a href="https://upc-paxtech.github.io/Frontend-Web-Applications/" class="bg-gradient-to-r from-purple-600 to-purple-800 text-white px-8 py-4 rounded-full shadow-md font-semibold hover:from-purple-700 hover:to-purple-900 transition" data-i18n="final_cta_button">
+          Comienza ahora →
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- Pricing -->
+<section id="pricing" class="bg-gradient-to-b from-white to-purple-50 py-20">
+  <div class="max-w-screen-xl mx-auto px-6 text-center">
+
+    <!-- Heading -->
+    <div class="mb-16">
+      <div class="text-sm text-purple-600 font-medium mb-2 flex justify-center items-center gap-2" data-i18n="pricing_section_title">
+        <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c.828 0 1.5-.895 1.5-2S12.828 4 12 4s-1.5.895-1.5 2 .672 2 1.5 2zm0 4c.828 0 1.5-.895 1.5-2s-.672-2-1.5-2-1.5.895-1.5 2 .672 2 1.5 2zm0 4c.828 0 1.5-.895 1.5-2s-.672-2-1.5-2-1.5.895-1.5 2 .672 2 1.5 2z" /></svg>
+        Pricing
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800" data-i18n="pricing_title">Flexible Plans for Every Salon Stage</h2>
+      <p class="text-gray-600 mt-2 max-w-xl mx-auto" data-i18n="pricing_subtitle">Choose the right tools to grow your beauty business — start free, upgrade anytime.</p>
+    </div>
+
+    <!-- Pricing Cards -->
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <!-- Essential Plan -->
+      <div class="bg-white rounded-xl shadow-md p-8 text-left border border-gray-100">
+        <p class="text-sm text-gray-500 font-medium mb-2" data-i18n="plan1_description">Start simple and stay organized</p>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2" data-i18n="plan1_name">Essential</h3>
+        <ul class="space-y-3 text-sm text-gray-700 mb-6">
+          <li class="flex items-center gap-2" data-i18n="plan1_feature1"><span class="text-purple-600">✔</span> Basic smart calendar</li>
+          <li class="flex items-center gap-2" data-i18n="plan1_feature2"><span class="text-purple-600" >✔</span> Client booking page</li>
+          <li class="flex items-center gap-2" data-i18n="plan1_feature3"><span class="text-purple-600" >✔</span> Reviews & ratings</li>
+          <li class="flex items-center gap-2" data-i18n="plan1_feature4"><span class="text-purple-600" >✔</span> Stylist profiles</li>
+          <li class="flex items-center gap-2" data-i18n="plan1_feature5"><span class="text-purple-600" >✔</span> 2 stylist accounts</li>
+        </ul>
+        <p class="text-3xl font-bold text-purple-700 mb-4" data-i18n="plan1_price">Free</p>
+        <button onclick="window.location.href='https://upc-paxtech.github.io/Frontend-Web-Applications/'" class="w-full bg-white border border-purple-600 text-purple-700 font-semibold py-2 rounded-md hover:bg-purple-50 transition" data-i18n="plan1_cta">Get Started</button>
+      </div>
+
+      <!-- ProStyle Plan -->
+      <div class="bg-white rounded-xl shadow-lg p-8 text-left border-2 border-purple-600 relative">
+        <p class="absolute top-0 right-0 bg-purple-600 text-white text-xs font-semibold rounded-bl-md px-3 py-1">Most Popular</p>
+        <p class="text-sm text-gray-500 font-medium mb-2" data-i18n="plan2_description">Level up your salon with smart tools</p>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2" data-i18n="plan2_name">ProStyle</h3>
+        <ul class="space-y-3 text-sm text-gray-700 mb-6">
+          <li class="flex items-center gap-2" data-i18n="plan2_feature1"><span class="text-purple-600">✔</span> Advanced calendar sync</li>
+          <li class="flex items-center gap-2" data-i18n="plan2_feature2"><span class="text-purple-600">✔</span> WhatsApp reminders</li>
+          <li class="flex items-center gap-2" data-i18n="plan2_feature3"><span class="text-purple-600">✔</span> Up to 5 stylists</li>
+          <li class="flex items-center gap-2" data-i18n="plan2_feature4"><span class="text-purple-600">✔</span> Performance tracking</li>
+          <li class="flex items-center gap-2" data-i18n="plan2_feature5"><span class="text-purple-600">✔</span> Priority support</li>
+        </ul>
+        <p class="text-3xl font-bold text-purple-700 mb-4" data-i18n="plan2_price">S/69.9<span class="text-base text-gray-500 font-normal">/month</span></p>
+        <button onclick="window.location.href='https://upc-paxtech.github.io/Frontend-Web-Applications/'" class="w-full bg-purple-700 text-white font-semibold py-2 rounded-md hover:bg-purple-800 transition" data-i18n="plan2_cta">Start Free Trial</button>
+      </div>
+
+      <!-- Deluxe Studio Plan -->
+      <div class="bg-white rounded-xl shadow-md p-8 text-left border border-gray-100">
+        <p class="text-sm text-gray-500 font-medium mb-2" data-i18n="plan3_description">All-in-one power for premium salons</p>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2" data-i18n="plan3_name">Deluxe Studio</h3>
+        <ul class="space-y-3 text-sm text-gray-700 mb-6">
+          <li class="flex items-center gap-2" data-i18n="plan3_feature1"><span class="text-purple-600">✔</span> Full calendar control</li>
+          <li class="flex items-center gap-2" data-i18n="plan3_feature2"><span class="text-purple-600">✔</span> Unlimited reminders</li>
+          <li class="flex items-center gap-2" data-i18n="plan3_feature3"><span class="text-purple-600">✔</span> Unlimited stylists</li>
+          <li class="flex items-center gap-2" data-i18n="plan3_feature4"><span class="text-purple-600">✔</span> Advanced analytics</li>
+          <li class="flex items-center gap-2" data-i18n="plan3_feature5"><span class="text-purple-600">✔</span> VIP support</li>
+        </ul>
+        <p class="text-3xl font-bold text-purple-700 mb-4" data-i18n="plan3_price">S/129.9<span class="text-base text-gray-500 font-normal">/month</span></p>
+        <button onclick="window.location.href='https://upc-paxtech.github.io/Frontend-Web-Applications/'" class="w-full bg-white border border-purple-600 text-purple-700 font-semibold py-2 rounded-md hover:bg-purple-50 transition" data-i18n="plan3_cta">Contact Us</button>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="py-24 px-6 bg-gradient-to-b from-purple-50 to-white">
+  <div class="max-w-6xl mx-auto rounded-3xl bg-white shadow-xl p-10 overflow-hidden">
+
+    <!-- Heading -->
+    <div class="text-center mb-12">
+      <div class="text-sm text-purple-600 font-medium mb-2 flex justify-center items-center gap-2" data-i18n="navbar_testimonials">
+        <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20h9" /></svg>
+        Testimonials
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800" data-i18n="testimonials_title">Confiado por más de 100+ negocios de belleza</h2>
+      <p class="text-gray-600 mt-2 max-w-2xl mx-auto" data-i18n="testimonials_subtitle">Conoce cómo uTime ha transformado su forma de trabajar y por qué es la herramienta ideal para su negocio.</p>
+    </div>
+
+    <!-- Carousel Wrapper Row 1 -->
+    <div class="overflow-hidden mb-10">
+      <div class="flex gap-6 animate-carousel-left">
+        <template id="carousel-row-1">
+          <div class="testimonial-card">
+            <div class="flex mb-2 text-purple-500 text-lg">★★★★★</div>
+            <p class="text-gray-700 mb-4" data-i18n="testimonial1_text">Desde que usamos uTime, la organización de las citas es impecable. Nuestros clientes están más felices y todo el equipo trabaja más tranquilo.</p>
+            <div class="flex items-center gap-3">
+              <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Luis Paredes" class="w-10 h-10 rounded-full object-cover">
+              <div>
+                <p class="font-semibold text-gray-800">Luis Paredes</p>
+                <p class="text-sm text-gray-500" data-i18n="testimonial1_role">Dueño de Barbería El Corte Fino</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="flex mb-2 text-purple-500 text-lg">★★★★★</div>
+            <p class="text-gray-700 mb-4" data-i18n="testimonial2_text">Con uTime ahorramos horas cada semana en la gestión del salón. Todo es más fluido, desde los turnos hasta el control del personal.</p>
+            <div class="flex items-center gap-3">
+              <img src="https://randomuser.me/api/portraits/women/20.jpg" alt="María Fernanda Ríos" class="w-10 h-10 rounded-full object-cover">
+              <div>
+                <p class="font-semibold text-gray-800">María Fernanda Ríos</p>
+                <p class="text-sm text-gray-500" data-i18n="testimonial2_role">Administradora en Salón Glamour</p>
+              </div>
+            </div>
+          </div>
+        </template>
+        <script>
+          const row1 = document.querySelector('.animate-carousel-left');
+          const row1Content = document.getElementById('carousel-row-1').content;
+          row1.appendChild(row1Content.cloneNode(true));
+          row1.appendChild(row1Content.cloneNode(true));
+        </script>
+      </div>
+    </div>
+
+    <!-- Carousel Wrapper Row 2 -->
+    <div class="overflow-hidden">
+      <div class="flex gap-6 animate-carousel-right">
+        <template id="carousel-row-2">
+          <div class="testimonial-card">
+            <div class="flex mb-2 text-purple-500 text-lg">★★★★★</div>
+            <p class="text-gray-700 mb-4" data-i18n="testimonial3_text">uTime me permite ver estadísticas y controlar mejor la productividad del equipo. Es justo lo que necesitábamos en nuestro centro de estética.</p>
+            <div class="flex items-center gap-3">
+              <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Karla Mendoza" class="w-10 h-10 rounded-full object-cover">
+              <div>
+                <p class="font-semibold text-gray-800">Karla Mendoza</p>
+                <p class="text-sm text-gray-500" data-i18n="testimonial3_role">Gerente de Estética Belle Femme</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="flex mb-2 text-purple-500 text-lg">★★★★★</div>
+            <p class="text-gray-700 mb-4" data-i18n="testimonial4_text">Recomiendo uTime a todos los colegas barberos. Es fácil de usar, potente y hace que el negocio funcione como reloj suizo.</p>
+            <div class="flex items-center gap-3">
+              <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Ricardo Torres" class="w-10 h-10 rounded-full object-cover">
+              <div>
+                <p class="font-semibold text-gray-800">Ricardo Torres</p>
+                <p class="text-sm text-gray-500" data-i18n="testimonial4_role">Jefe de Barbería Urban Style</p>
+              </div>
+            </div>
+          </div>
+        </template>
+        <script>
+          const row2 = document.querySelector('.animate-carousel-right');
+          const row2Content = document.getElementById('carousel-row-2').content;
+          row2.appendChild(row2Content.cloneNode(true));
+          row2.appendChild(row2Content.cloneNode(true));
+        </script>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<style>
+  @keyframes carousel-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes carousel-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+  .animate-carousel-left {
+    animation: carousel-left 60s linear infinite;
+  }
+  .animate-carousel-right {
+    animation: carousel-right 60s linear infinite;
+  }
+  .testimonial-card {
+    width: 300px;
+    background: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #374151;
+    flex-shrink: 0;
+  }
+</style>
+
+
+<!-- Video About the Product Section -->
+<section id="about-product-video" class="py-24 px-6 bg-gradient-to-b from-white to-purple-50">
+  <div class="max-w-6xl mx-auto rounded-3xl bg-white shadow-xl p-10 overflow-hidden">
+
+    <!-- Heading -->
+    <div class="text-center mb-12">
+      <div class="text-sm text-purple-600 font-medium mb-2 flex justify-center items-center gap-2" data-i18n="video_section_title">
+        <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553 2.276a1 1 0 010 1.788L15 16.34V10z M5 5h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/>
+        </svg>
+        Video del Producto
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800" data-i18n="video_title">Descubre cómo funciona uTime</h2>
+      <p class="text-gray-600 mt-2 max-w-2xl mx-auto" data-i18n="video_subtitle">Conoce a fondo las funcionalidades clave de uTime y cómo puede optimizar la gestión de tu negocio.</p>
+    </div>
+
+    
+    <!-- Embedded Video -->
+    <!--
+    <div class="relative w-full overflow-hidden rounded-xl shadow-lg" style="padding-top: 56.25%;">
+      <iframe class="absolute top-0 left-0 w-full h-full"
+              src=""
+              title="uTime Product Video"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+      </iframe>
+    </div>
+    -->
+
+  </div>
+</section>
+
+
+
+<!-- FAQ Section -->
+<section id="faq" class="py-24 px-6 bg-gradient-to-b from-white to-purple-50">
+  <div class="max-w-4xl mx-auto rounded-3xl bg-white shadow-xl p-10 overflow-hidden">
+
+    <!-- Heading -->
+    <div class="text-center mb-12">
+      <div class="text-sm text-purple-600 font-medium mb-2 flex justify-center items-center gap-2" data-i18n="faq_title">
+        <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 20h9" />
+        </svg>
+        Frequently Asked Questions
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800" data-i18n="faq_name">Clear Your Doubts About uTime</h2>
+      <p class="text-gray-600 mt-2 max-w-2xl mx-auto" data-i18n="faq_subtitle">Here you’ll find answers to the most common questions about our platform for barbershops and beauty salons.</p>
+    </div>
+
+    <!-- Accordion Container -->
+    <div class="space-y-4 text-left" id="faq-accordion">
+
+      <!-- Item 1 -->
+      <div class="bg-gray-50 shadow-sm rounded-xl overflow-hidden transition-all duration-300">
+        <button class="w-full flex justify-between items-center px-5 py-4 text-left font-medium text-gray-800 focus:outline-none" data-i18n="faq_question1" data-toggle>
+          Is uTime suitable for small barbershops or just for large businesses?
+          <svg class="w-5 h-5 text-purple-600 transform transition-transform" data-icon fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="faq-content px-5 text-gray-600 transition-all duration-500 ease-in-out max-h-0 overflow-hidden" data-content data-i18n="faq_answer1">
+          <p class="py-4">uTime is designed to adapt to businesses of any size, from solo barbers to salons with multiple team members.</p>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="bg-gray-50 shadow-sm rounded-xl overflow-hidden transition-all duration-300">
+        <button class="w-full flex justify-between items-center px-5 py-4 text-left font-medium text-gray-800 focus:outline-none" data-toggle data-i18n="faq_question2">
+          Do I need an internet connection to use uTime?
+          <svg class="w-5 h-5 text-purple-600 transform transition-transform" data-icon fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="faq-content px-5 text-gray-600 transition-all duration-500 ease-in-out max-h-0 overflow-hidden" data-content data-i18n="faq_answer2">
+          <p class="py-4">Yes, uTime is a cloud-based platform, so it requires an internet connection to work properly and sync data in real time.</p>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="bg-gray-50 shadow-sm rounded-xl overflow-hidden transition-all duration-300">
+        <button class="w-full flex justify-between items-center px-5 py-4 text-left font-medium text-gray-800 focus:outline-none" data-toggle data-i18n="faq_question3">
+          Does uTime help manage staff schedules and shifts?
+          <svg class="w-5 h-5 text-purple-600 transform transition-transform" data-icon fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="faq-content px-5 text-gray-600 transition-all duration-500 ease-in-out max-h-0 overflow-hidden" data-content data-i18n="faq_answer3">
+          <p class="py-4">Absolutely! uTime is designed to make it easy to organize shifts, manage schedules, and track staff attendance.</p>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="bg-gray-50 shadow-sm rounded-xl overflow-hidden transition-all duration-300">
+        <button class="w-full flex justify-between items-center px-5 py-4 text-left font-medium text-gray-800 focus:outline-none" data-toggle data-i18n="faq_question4">
+          Is there a free trial to try uTime?
+          <svg class="w-5 h-5 text-purple-600 transform transition-transform" data-icon fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="faq-content px-5 text-gray-600 transition-all duration-500 ease-in-out max-h-0 overflow-hidden" data-content data-i18n="faq_answer4">
+          <p class="py-4">Yes, we offer a 14-day free trial so you can explore all uTime features without any commitment.</p>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="bg-gray-50 shadow-sm rounded-xl overflow-hidden transition-all duration-300">
+        <button class="w-full flex justify-between items-center px-5 py-4 text-left font-medium text-gray-800 focus:outline-none" data-toggle data-i18n="faq_question5">
+          Does uTime help me manage client appointments?
+          <svg class="w-5 h-5 text-purple-600 transform transition-transform" data-icon fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="faq-content px-5 text-gray-600 transition-all duration-500 ease-in-out max-h-0 overflow-hidden" data-content data-i18n="faq_answer5">
+          <p class="py-4">Yes. uTime includes an intelligent booking system that allows your clients to book online and receive automatic reminders.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+  document.querySelectorAll('[data-toggle]').forEach(button => {
+    button.addEventListener('click', () => {
+      const content = button.nextElementSibling;
+      const icon = button.querySelector('[data-icon]');
+      const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+
+      // Cierra todos los contenidos abiertos
+      document.querySelectorAll('[data-content]').forEach(el => {
+        el.style.maxHeight = null;
+        const iconInside = el.previousElementSibling.querySelector('[data-icon]');
+        iconInside && iconInside.classList.remove('rotate-180');
+      });
+
+      // Si no estaba abierto, lo abre
+      if (!isOpen) {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        icon.classList.add('rotate-180');
+      }
+    });
+  });
+</script>
+
+<style>
+  .faq-content {
+    transition: max-height 0.5s ease;
+    overflow: hidden;
+    max-height: 0;
+  }
+
+  .rotate-180 {
+    transform: rotate(180deg);
+  }
+</style>
+
+
+
+<!-- Call to Action -->
+<section id="cta" class="text-center py-28 px-6 bg-gradient-to-b from-white to-purple-50">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-sm text-purple-600 font-medium mb-4 inline-block px-4 py-1 bg-white shadow rounded-full" data-i18n="tag">
+      Take your barbershop or salon to the next level
+    </div>
+    <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight" data-i18n="cta_title">
+      Ready to transform<br>your daily operations?
+    </h2>
+    <p class="text-gray-600 mt-6 mb-10" data-i18n="cta_subtitle">
+      Discover how uTime helps you manage appointments, shifts, and clients with ease. Start today and optimize your time like never before.
+    </p>
+    <a href="https://upc-paxtech.github.io/Frontend-Web-Applications/" class="inline-block px-8 py-4 text-white font-semibold rounded-full bg-gradient-to-r from-purple-600 to-purple-800 shadow-lg hover:from-purple-700 hover:to-purple-900 transition" data-i18n="cta_button">
+      Start for Free →
+    </a>
+  </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="bg-gradient-to-b from-purple-50 to-white text-sm text-gray-600">
+  <div class="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-5 gap-8">
+    <!-- Logo -->
+    <div class="md:col-span-1">
+      <h1 class="text-xl font-bold text-purple-700 mb-4">uTime</h1>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h4 class="text-gray-800 font-semibold mb-3" data-i18n="footer_quick_links">Quick Links</h4>
+      <ul class="space-y-2">
+        <li><a href="#hero" class="hover:text-purple-600" data-i18n="footer_link1">Home</a></li>
+        <li><a href="#features" class="hover:text-purple-600" data-i18n="footer_link2">features</a></li>
+        <li><a href="#faq" class="hover:text-purple-600" data-i18n="footer_link3">FAQ</a></li>
+        <li><a href="https://upc-paxtech.github.io/Frontend-Web-Applications/" class="hover:text-purple-600" data-i18n="footer_link4">Support</a></li>
+      </ul>
+    </div>
+
+    <!-- Support -->
+    <div>
+      <h4 class="text-gray-800 font-semibold mb-3" data-i18n="footer_support">Support</h4>
+      <ul class="space-y-2">
+        <li><a href="https://upc-paxtech.github.io/Frontend-Web-Applications/" class="hover:text-purple-600" data-i18n="footer_support_link1">Help Center</a></li>
+        <li><a href="https://upc-paxtech.github.io/Frontend-Web-Applications/" class="hover:text-purple-600" data-i18n="footer_support_link2">Getting Started</a></li>
+        <li><a href="https://upc-paxtech.github.io/Frontend-Web-Applications/" class="hover:text-purple-600" data-i18n="footer_support_link3">Contact Support</a></li>
+        <li><a href="https://upc-paxtech.github.io/Frontend-Web-Applications/" class="hover:text-purple-600" data-i18n="footer_support_link4">Community Forums</a></li>
+        <li><a href="https://upc-paxtech.github.io/Frontend-Web-Applications/" class="hover:text-purple-600" data-i18n="footer_support_link5">Documentation</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Us -->
+    <div>
+      <h4 class="text-gray-800 font-semibold mb-3" data-i18n="footer_contact">Contact Us</h4>
+      <ul class="space-y-2">
+        <li data-i18n="footer_contact_info1">📧 utime@company.com</li>
+        <li data-i18n="footer_contact_info2">📞 (+51) 979 447 361</li>
+        <li data-i18n="footer_contact_info3">📍 Lima Lima Miraflores<br>Peru</li>
+      </ul>
+    </div>
+
+    <!-- Social -->
+    <div>
+      <h4 class="text-gray-800 font-semibold mb-3" data-i18n="footer_social">Social</h4>
+      <div class="flex space-x-3">
+        <a href="https://www.facebook.com/utime_upc" class="bg-purple-600 hover:bg-purple-700 text-white w-9 h-9 rounded-full flex items-center justify-center">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://x.com/utime_upc" class="bg-purple-600 hover:bg-purple-700 text-white w-9 h-9 rounded-full flex items-center justify-center">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.linkedin.com/404/" class="bg-purple-600 hover:bg-purple-700 text-white w-9 h-9 rounded-full flex items-center justify-center">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://www.youtube.com/utime_upc" class="bg-purple-600 hover:bg-purple-700 text-white w-9 h-9 rounded-full flex items-center justify-center">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://www.instagram.com/utime_upc" class="bg-purple-600 hover:bg-purple-700 text-white w-9 h-9 rounded-full flex items-center justify-center">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="text-center border-t border-gray-200 py-4 text-xs text-gray-500" data-i18n="footer_copyright">
+    © 2025 uTime. All rights reserved.
+  </div>
+</footer>
+
+<!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</body>
+</html>
