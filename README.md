@@ -2,9 +2,6 @@
 
 Bienvenido al repositorio oficial de la **Landing Page de uTime**, una plataforma moderna desarrollada por **PaxTech** para revolucionar la forma en que salones de belleza y barberías gestionan sus reservas y servicios.
 
-🔗 **Explora la Landing Page en vivo**:  
-[https://upc-paxtech.github.io/uTime-Landing-Page/](https://upc-paxtech.github.io/uTime-Landing-Page/)
-
 ---
 
 ## 🧠 ¿Qué es uTime?
@@ -48,11 +45,3 @@ Esta landing page tiene como propósito captar el interés de:
 - Inversionistas o aliados interesados en soluciones digitales aplicadas al sector belleza.
 
 ---
-
-## 🛠 Cómo contribuir
-
-¿Quieres ayudarnos a mejorar esta landing page?
-
-```bash
-git clone https://github.com/PaxTech-UPC/uTime-Landing-Page.git
-cd uTime-Landing-Page
