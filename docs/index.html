@@ -107,20 +107,20 @@
 
     <!-- Layout para desktop: Logo - Navegación - Controles -->
     <div class="hidden md:flex items-center justify-between w-full">
-      <!-- Logo (izquierda) -->
-      <div class="flex items-center flex-shrink-0">
+      <!-- Logo y botón colapsar (izquierda) -->
+      <div class="flex items-center flex-shrink-0 gap-3">
         <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
           <img src="https://github.com/UPC-PaxTech/uTime/blob/main/img/logoutime.png?raw=true" alt="Logo" class="h-10 w-auto max-h-full">
         </button>
+        
+        <!-- Botón para colapsar (solo desktop) -->
+        <button id="collapseNavbarBtn"
+                class="text-purple-700 hover:text-white bg-purple-100 hover:bg-purple-700 transition-all duration-300 rounded-full p-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
       </div>
-
-      <!-- Botón para colapsar (solo desktop) -->
-      <button id="collapseNavbarBtn"
-              class="mr-6 text-purple-700 hover:text-white bg-purple-100 hover:bg-purple-700 transition-all duration-300 rounded-full p-2">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
 
       <!-- Links de navegación (centro) -->
       <ul class="flex gap-6 flex-1 justify-center text-base font-medium text-gray-600">
@@ -807,10 +807,23 @@
     Start for Free →
   </a>
 
-  <img
-    src="https://i.ibb.co/hFnGY2xT/HeroLP.png"
-    alt="Vista previa de la app"
-    class="mt-8 sm:mt-12 md:mt-14 w-full max-w-sm sm:max-w-2xl md:max-w-4xl rounded-2xl shadow-2xl border border-white/40">
+  <!-- Mobile Screens Preview -->
+  <div class="mt-8 sm:mt-12 md:mt-14 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-8">
+    <img
+      src="assets/img/Pantalla1.png"
+      alt="Pantalla 1 - Inicio de la app"
+      class="w-48 sm:w-56 md:w-64 rounded-2xl shadow-2xl border border-white/40 hover:scale-105 transition-transform duration-300">
+    
+    <img
+      src="assets/img/Pantalla2.png"
+      alt="Pantalla 2 - Servicios del salón"
+      class="w-48 sm:w-56 md:w-64 rounded-2xl shadow-2xl border border-white/40 hover:scale-105 transition-transform duration-300">
+    
+    <img
+      src="assets/img/Pantalla3.png"
+      alt="Pantalla 3 - Reseñas del salón"
+      class="w-48 sm:w-56 md:w-64 rounded-2xl shadow-2xl border border-white/40 hover:scale-105 transition-transform duration-300">
+  </div>
 
 </section>
 
@@ -856,9 +869,17 @@
           Get Started →
         </button>
       </div>
-      <!-- Image -->
-      <div class="lg:w-1/2 w-full">
-        <img src="https://i.ibb.co/6cZ5B5QV/CHA2.png" alt="Real-Time Booking Calendar" class="w-full rounded-xl shadow-xl">
+      <!-- Mobile Screens Preview -->
+      <div class="lg:w-1/2 w-full flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+        <img
+          src="assets/img/Pantalla4.png"
+          alt="Pantalla 4 - Seleccionar profesional"
+          class="w-40 sm:w-48 md:w-52 rounded-xl shadow-xl hover:scale-105 transition-transform duration-300">
+        
+        <img
+          src="assets/img/Pantalla5.png"
+          alt="Pantalla 5 - Seleccionar hora"
+          class="w-40 sm:w-48 md:w-52 rounded-xl shadow-xl hover:scale-105 transition-transform duration-300">
       </div>
     </div>
   </div>
@@ -900,9 +921,17 @@
           Get Started →
         </button>
       </div>
-      <!-- Image -->
-      <div class="lg:w-1/2 w-full">
-        <img src="https://i.ibb.co/VYkTGhFv/CHA1.png" alt="Payments Feature Image" class="w-full rounded-xl shadow-xl">
+      <!-- Mobile Screens Preview -->
+      <div class="lg:w-1/2 w-full flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+        <img
+          src="assets/img/Pantalla6.png"
+          alt="Pantalla 6 - Revisar y confirmar"
+          class="w-40 sm:w-48 md:w-52 rounded-xl shadow-xl hover:scale-105 transition-transform duration-300">
+        
+        <img
+          src="assets/img/Pantalla7.png"
+          alt="Pantalla 7 - Cita confirmada"
+          class="w-40 sm:w-48 md:w-52 rounded-xl shadow-xl hover:scale-105 transition-transform duration-300">
       </div>
     </div>
   </div>
@@ -944,9 +973,17 @@
           Get Started →
         </button>
       </div>
-      <!-- Image -->
-      <div class="lg:w-1/2 w-full">
-        <img src="https://i.ibb.co/2rML071/S3LP.png" alt="Custom Profile Feature Image" class="w-full rounded-xl shadow-xl">
+      <!-- Mobile Screens Preview -->
+      <div class="lg:w-1/2 w-full flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+        <img
+          src="assets/img/Pantalla0.png"
+          alt="Pantalla 0 - Mi perfil"
+          class="w-40 sm:w-48 md:w-52 rounded-xl shadow-xl hover:scale-105 transition-transform duration-300">
+        
+        <img
+          src="assets/img/Pantalla8.png"
+          alt="Pantalla 8 - Cuenta de empresa"
+          class="w-40 sm:w-48 md:w-52 rounded-xl shadow-xl hover:scale-105 transition-transform duration-300">
       </div>
     </div>
   </div>
@@ -975,15 +1012,23 @@
         <div class="absolute left-1/2 transform -translate-x-1/2 h-full border-l-2 border-purple-200"></div>
 
         <!-- Step 1 -->
-        <div class="relative z-10 flex flex-row items-start gap-12 mb-20">
+        <div class="relative z-10 flex flex-row items-center gap-12 mb-20">
           <div class="w-1/2 pr-12 text-right">
             <h3 class="text-xl font-semibold text-gray-800 mb-2" data-i18n="step1_title">Crea tu cuenta</h3>
             <p class="text-gray-600 text-base" data-i18n="step1_description">
               Regístrate fácilmente ingresando tu información básica. Accede a tu panel personalizado para comenzar a gestionar tu negocio.
             </p>
           </div>
-          <div class="w-1/2">
-            <img src="https://i.ibb.co/mVLJjVQc/STEPS1.png" alt="Step 1" class="rounded-xl shadow-lg max-w-sm">
+          <div class="w-1/2 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <img
+              src="assets/img/Flujo1.png"
+              alt="Flujo 1 - Registro de negocio"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+            
+            <img
+              src="assets/img/Flujo2.png"
+              alt="Flujo 2 - Bienvenida a uTime"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
           </div>
           <div class="absolute left-1/2 top-1 transform -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-purple-300 rounded-full w-12 h-12 flex items-center justify-center text-purple-700 text-2xl">
             👤
@@ -991,15 +1036,23 @@
         </div>
 
         <!-- Step 2 -->
-        <div class="relative z-10 flex flex-row-reverse items-start gap-12 mb-20">
+        <div class="relative z-10 flex flex-row-reverse items-center gap-12 mb-20">
           <div class="w-1/2 pl-12 text-left">
             <h3 class="text-xl font-semibold text-gray-800 mb-2" data-i18n="step2_title">Agrega y gestiona a tus trabajadores</h3>
             <p class="text-gray-600 text-base" data-i18n="step2_description">
               Registra a tu equipo, asigna sus horarios y controla sus agendas desde un solo lugar.
             </p>
           </div>
-          <div class="w-1/2">
-            <img src="https://i.ibb.co/6cZ5B5QV/CHA2.png" alt="Step 2" class="rounded-xl shadow-lg max-w-sm">
+          <div class="w-1/2 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <img
+              src="assets/img/Flujo3.png"
+              alt="Flujo 3 - Agregar miembro"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+            
+            <img
+              src="assets/img/Flujo4.png"
+              alt="Flujo 4 - Gestión de equipo"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
           </div>
           <div class="absolute left-1/2 top-1 transform -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-purple-300 rounded-full w-12 h-12 flex items-center justify-center text-purple-700 text-2xl">
             🧑‍🤝‍🧑
@@ -1007,15 +1060,23 @@
         </div>
 
         <!-- Step 3 -->
-        <div class="relative z-10 flex flex-row items-start gap-12 mb-20">
+        <div class="relative z-10 flex flex-row items-center gap-12 mb-20">
           <div class="w-1/2 pr-12 text-right">
             <h3 class="text-xl font-semibold text-gray-800 mb-2" data-i18n="step3_title">Define tus servicios</h3>
             <p class="text-gray-600 text-base" data-i18n="step3_description">
               Crea y personaliza los servicios que ofreces. Establece duración, precio y asigna trabajadores específicos a cada uno.
             </p>
           </div>
-          <div class="w-1/2">
-            <img src="https://i.ibb.co/Z1gnPqM3/CHA3.png" alt="Step 3" class="rounded-xl shadow-lg max-w-sm">
+          <div class="w-1/2 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <img
+              src="assets/img/Flujo5.png"
+              alt="Flujo 5 - Nuevo servicio"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+            
+            <img
+              src="assets/img/Flujo6.png"
+              alt="Flujo 6 - Gestión de servicios"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
           </div>
           <div class="absolute left-1/2 top-1 transform -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-purple-300 rounded-full w-12 h-12 flex items-center justify-center text-purple-700 text-2xl">
             💈
@@ -1023,15 +1084,23 @@
         </div>
 
         <!-- Step 4 -->
-        <div class="relative z-10 flex flex-row-reverse items-start gap-12 mb-20">
+        <div class="relative z-10 flex flex-row-reverse items-center gap-12 mb-20">
           <div class="w-1/2 pl-12 text-left">
             <h3 class="text-xl font-semibold text-gray-800 mb-2" data-i18n="step4_title">Personaliza tu perfil</h3>
             <p class="text-gray-600 text-base" data-i18n="step4_description">
               Agrega fotos, descripción, dirección, métodos de pago y más para construir un perfil profesional y confiable.
             </p>
           </div>
-          <div class="w-1/2">
-            <img src="https://i.ibb.co/2rML071/S3LP.png" alt="Step 4" class="rounded-xl shadow-lg max-w-sm">
+          <div class="w-1/2 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <img
+              src="assets/img/Pantalla0.png"
+              alt="Pantalla 0 - Mi perfil"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+            
+            <img
+              src="assets/img/Pantalla8.png"
+              alt="Pantalla 8 - Cuenta de empresa"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
           </div>
           <div class="absolute left-1/2 top-1 transform -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-purple-300 rounded-full w-12 h-12 flex items-center justify-center text-purple-700 text-2xl">
             🧾
@@ -1039,15 +1108,23 @@
         </div>
 
         <!-- Step 5 -->
-        <div class="relative z-10 flex flex-row items-start gap-12 mb-20">
+        <div class="relative z-10 flex flex-row items-center gap-12 mb-20">
           <div class="w-1/2 pr-12 text-right">
             <h3 class="text-xl font-semibold text-gray-800 mb-2" data-i18n="step5_title">Visualiza tu calendario</h3>
             <p class="text-gray-600 text-base" data-i18n="step5_description">
               Accede a una vista general del calendario de todos tus trabajadores y gestiona tu agenda con eficiencia.
             </p>
           </div>
-          <div class="w-1/2">
-            <img src="https://i.ibb.co/x8jKLZpC/STEPS5.png" alt="Step 5" class="rounded-xl shadow-lg max-w-sm">
+          <div class="w-1/2 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <img
+              src="assets/img/Flujo7.png"
+              alt="Flujo 7 - Calendario de citas"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+            
+            <img
+              src="assets/img/Flujo8.png"
+              alt="Flujo 8 - Gestión de agenda"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
           </div>
           <div class="absolute left-1/2 top-1 transform -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-purple-300 rounded-full w-12 h-12 flex items-center justify-center text-purple-700 text-2xl">
             📆
@@ -1071,7 +1148,17 @@
           <p class="text-gray-600 text-sm mb-4" data-i18n="step1_description">
             Regístrate fácilmente ingresando tu información básica. Accede a tu panel personalizado para comenzar a gestionar tu negocio.
           </p>
-          <img src="https://i.ibb.co/mVLJjVQc/STEPS1.png" alt="Step 1" class="w-full rounded-xl shadow-md">
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <img
+              src="assets/img/Flujo1.png"
+              alt="Flujo 1 - Registro de negocio"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+            
+            <img
+              src="assets/img/Flujo2.png"
+              alt="Flujo 2 - Bienvenida a uTime"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+          </div>
         </div>
 
         <!-- Step 2 -->
@@ -1088,7 +1175,17 @@
           <p class="text-gray-600 text-sm mb-4" data-i18n="step2_description">
             Registra a tu equipo, asigna sus horarios y controla sus agendas desde un solo lugar.
           </p>
-          <img src="https://i.ibb.co/6cZ5B5QV/CHA2.png" alt="Step 2" class="w-full rounded-xl shadow-md">
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <img
+              src="assets/img/Flujo3.png"
+              alt="Flujo 3 - Agregar miembro"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+            
+            <img
+              src="assets/img/Flujo4.png"
+              alt="Flujo 4 - Gestión de equipo"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+          </div>
         </div>
 
         <!-- Step 3 -->
@@ -1105,7 +1202,17 @@
           <p class="text-gray-600 text-sm mb-4" data-i18n="step3_description">
             Crea y personaliza los servicios que ofreces. Establece duración, precio y asigna trabajadores específicos a cada uno.
           </p>
-          <img src="https://i.ibb.co/Z1gnPqM3/CHA3.png" alt="Step 3" class="w-full rounded-xl shadow-md">
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <img
+              src="assets/img/Flujo5.png"
+              alt="Flujo 5 - Nuevo servicio"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+            
+            <img
+              src="assets/img/Flujo6.png"
+              alt="Flujo 6 - Gestión de servicios"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+          </div>
         </div>
 
         <!-- Step 4 -->
@@ -1122,7 +1229,17 @@
           <p class="text-gray-600 text-sm mb-4" data-i18n="step4_description">
             Agrega fotos, descripción, dirección, métodos de pago y más para construir un perfil profesional y confiable.
           </p>
-          <img src="https://i.ibb.co/2rML071/S3LP.png" alt="Step 4" class="w-full rounded-xl shadow-md">
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <img
+              src="assets/img/Pantalla0.png"
+              alt="Pantalla 0 - Mi perfil"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+            
+            <img
+              src="assets/img/Pantalla8.png"
+              alt="Pantalla 8 - Cuenta de empresa"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+          </div>
         </div>
 
         <!-- Step 5 -->
@@ -1139,7 +1256,17 @@
           <p class="text-gray-600 text-sm mb-4" data-i18n="step5_description">
             Accede a una vista general del calendario de todos tus trabajadores y gestiona tu agenda con eficiencia.
           </p>
-          <img src="https://i.ibb.co/x8jKLZpC/STEPS5.png" alt="Step 5" class="w-full rounded-xl shadow-md">
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <img
+              src="assets/img/Flujo7.png"
+              alt="Flujo 7 - Calendario de citas"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+            
+            <img
+              src="assets/img/Flujo8.png"
+              alt="Flujo 8 - Gestión de agenda"
+              class="w-32 sm:w-36 md:w-40 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+          </div>
         </div>
       </div>
     </div>
